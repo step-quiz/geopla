@@ -1,0 +1,78 @@
+/*
+============================================================================
+PROJECTE: geopla (Step Quiz, vanilla JS)
+FITXER: css/tokens.css
+ROL: Colors i mides comuns, en mode clar i fosc. La resta dels estils només
+     fan servir aquestes variables. Contrast del text ≥ 4,5:1.
+DEPENDÈNCIES: cap. Es carrega abans de css/geopla.css.
+============================================================================
+*/
+:root {
+    --text: #1e293b;
+    --text-suau: #475569;
+    --fons: #f8fafc;
+    --panell: #ffffff;
+    --vora-panell: #e2e8f0;
+    --primari: #0f766e;
+    --primari-fosc: #115e59;
+    --primari-clar: #ccfbf1;
+    --be: #047857;
+    --be-fons: #d1fae5;
+    --error: #b91c1c;
+    --error-fons: #fee2e2;
+    --info: #1d4ed8;
+    --info-fons: #dbeafe;
+
+    /* Tauler */
+    --t-fons: #fffbeb;
+    --t-linia: #e7e5e4;
+    --t-punt: #57534e;
+    --t-goma: #c2410c;
+    --t-goma-fons: rgba(251, 146, 60, 0.18);
+    --t-forat: #7c3aed;
+    --t-forat-fons: #f5f3ff;
+    --t-contra: #be123c;
+    --t-vora: #c2410c;
+    --t-dins: #1d4ed8;
+    --t-peca-a: rgba(14, 165, 233, 0.22);
+    --t-peca-b: rgba(234, 179, 8, 0.28);
+    --t-peca-c: rgba(168, 85, 247, 0.22);
+    --t-peca-d: rgba(34, 197, 94, 0.25);
+    --t-ajuda: #0f766e;
+
+    --radi: 10px;
+    --ombra: 0 1px 3px rgba(15, 23, 42, 0.08);
+    --lletra: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text: #e2e8f0;
+        --text-suau: #94a3b8;
+        --fons: #0f172a;
+        --panell: #1e293b;
+        --vora-panell: #334155;
+        --primari: #2dd4bf;
+        --primari-fosc: #5eead4;
+        --primari-clar: #134e4a;
+        --be: #6ee7b7;
+        --be-fons: #064e3b;
+        --error: #fca5a5;
+        --error-fons: #450a0a;
+        --info: #93c5fd;
+        --info-fons: #1e3a8a;
+
+        --t-fons: #1c1917;
+        --t-linia: #292524;
+        --t-punt: #d6d3d1;
+        --t-goma: #fb923c;
+        --t-goma-fons: rgba(251, 146, 60, 0.16);
+        --t-forat: #c4b5fd;
+        --t-forat-fons: #1e1b4b;
+        --t-contra: #fb7185;
+        --t-vora: #fb923c;
+        --t-dins: #60a5fa;
+        --t-ajuda: #5eead4;
+        --ombra: none;
+    }
+}

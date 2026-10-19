@@ -1,0 +1,94 @@
+/*
+============================================================================
+PROJECTE: geopla (Step Quiz, vanilla JS)
+FITXER: css/imprimir.css
+ROL: El full A4 de punts (imprimir.html). A la pantalla, els controls; en
+     imprimir, només els geoplans, negre sobre blanc, 1 cm entre punts.
+DEPENDÈNCIES: css/tokens.css
+============================================================================
+*/
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 16px;
+    font-family: var(--lletra);
+    color: var(--text);
+    background: var(--fons);
+}
+.controls {
+    max-width: 760px;
+    margin: 0 auto 16px;
+}
+.controls h1 {
+    margin: 0 0 4px;
+    font-size: 1.4em;
+}
+.controls a {
+    color: var(--primari-fosc);
+}
+.controls select,
+.btn {
+    min-height: 44px;
+    font: inherit;
+    padding: 6px 12px;
+    margin: 4px 8px 4px 0;
+    border-radius: 8px;
+}
+.btn {
+    border: 2px solid var(--primari);
+    background: var(--primari);
+    color: var(--panell);
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-petit {
+    min-height: 36px;
+    padding: 2px 10px;
+}
+.avis {
+    background: var(--info-fons);
+    color: var(--info);
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+.full {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8mm 12mm;
+    max-width: 180mm;
+    margin: 0 auto;
+    padding: 6mm;
+    background: #fff;
+    color: #000;
+}
+.geopla {
+    margin: 0;
+    text-align: center;
+}
+.geopla svg {
+    display: block;
+    fill: #000;
+}
+.geopla figcaption {
+    margin-top: 2mm;
+    font-size: 11pt;
+}
+@page {
+    size: A4;
+    margin: 15mm;
+}
+@media print {
+    body {
+        padding: 0;
+        background: #fff;
+    }
+    .controls {
+        display: none;
+    }
+    .full {
+        padding: 0;
+    }
+}

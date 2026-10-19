@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geoplà de Pick · Step Quiz</title>
+    <meta name="description" content="Descobreix el teorema de Pick comptant punts en un geoplà.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css?v=f1cb4d9f">
+    <link rel="stylesheet" href="css/geopla.css?v=6e69c8b5">
+</head>
+<body>
+    <header class="capcalera">
+        <h1>Geoplà de Pick</h1>
+        <a href="imprimir.html">Full de punts per imprimir</a>
+    </header>
+
+    <nav id="fases" class="fases" aria-label="Fases"></nav>
+
+    <main class="principal">
+        <section class="zona-tauler" aria-label="Geoplà">
+            <svg id="tauler" class="tauler" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div id="anunci" class="sr" aria-live="polite"></div>
+            <div class="llegenda" aria-hidden="true">
+                <span><span class="icona-vora"></span> vora</span>
+                <span><span class="icona-dins"></span> dins</span>
+            </div>
+        </section>
+
+        <section class="zona-panell" aria-labelledby="titol-fase">
+            <div class="cap-fase">
+                <h2 id="titol-fase">F1</h2>
+                <div id="progres" class="progres" role="img"></div>
+            </div>
+            <p id="instruccio" class="instruccio"></p>
+            <div id="panell"></div>
+            <div id="feedback" class="feedback" aria-live="polite"></div>
+            <div id="accions" class="accions"></div>
+        </section>
+    </main>
+
+    <section class="zona-taula" aria-labelledby="titol-taula">
+        <h2 id="titol-taula">La teva taula</h2>
+        <div class="taula-wrap">
+            <table class="taula">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">B (vora)</th>
+                        <th scope="col">I (dins)</th>
+                        <th scope="col">A (àrea)</th>
+                        <th scope="col" id="col-h" hidden>H (forats)</th>
+                        <th scope="col">Fase</th>
+                    </tr>
+                </thead>
+                <tbody id="taula-cos"></tbody>
+            </table>
+        </div>
+        <p id="taula-buida" class="nota">Encara no hi ha cap polígon. Cada polígon que acabis s’hi afegeix.</p>
+        <div id="accions-taula" class="accions">
+            <button type="button" class="btn" id="btn-csv">Desa CSV</button>
+            <button type="button" class="btn" id="btn-imprimeix">Imprimeix la taula</button>
+            <button type="button" class="btn" id="btn-esborra-taula">Esborra la taula</button>
+        </div>
+    </section>
+
+    <footer class="peu">
+        <p>
+            <button type="button" class="btn btn-petit" id="btn-reinicia">Torna a començar</button>
+            Res del que fas surt d’aquest ordinador: la taula només es desa en aquest navegador.
+        </p>
+        <p>
+            Material desenvolupat per David Arso Civil per al Departament de Matemàtiques de l’INS Miquel Tarradell.
+            Contingut sota CC BY-NC-SA 4.0, codi sota llicència MIT. <a href="LLICENCIA.md">Llicència</a>.
+        </p>
+    </footer>
+
+    <script src="js/motor/atzar.js?v=b052413c"></script>
+    <script src="js/motor/geometria.js?v=e02d6baa"></script>
+    <script src="js/motor/formula.js?v=dff0f6a1"></script>
+    <script src="js/motor/fases.js?v=9056b8b9"></script>
+    <script src="js/ui/textos.js?v=4dbffca9"></script>
+    <script src="js/ui/tauler.js?v=5acb77fe"></script>
+    <script src="js/ui/app.js?v=3f417590"></script>
+</body>
+</html>

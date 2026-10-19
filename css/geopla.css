@@ -1,0 +1,554 @@
+/*
+============================================================================
+PROJECTE: geopla (Step Quiz, vanilla JS)
+FITXER: css/geopla.css
+ROL: Estils del Geoplà de Pick (index.html): capçalera, fases, tauler,
+     panell, taula, perfil PI i impressió (sempre negre sobre blanc).
+DEPENDÈNCIES: css/tokens.css (es carrega abans).
+============================================================================
+*/
+* {
+    box-sizing: border-box;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+    padding: 12px 16px 32px;
+    font-family: var(--lletra);
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--text);
+    background: var(--fons);
+}
+button,
+input {
+    font: inherit;
+}
+.sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ── Capçalera ─────────────────────────────────────────────────────────── */
+.capcalera {
+    max-width: 1100px;
+    margin: 0 auto 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+}
+.capcalera h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--primari-fosc);
+}
+.capcalera a {
+    color: var(--primari-fosc);
+}
+
+/* ── Fases ─────────────────────────────────────────────────────────────── */
+.fases {
+    max-width: 1100px;
+    margin: 0 auto 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.fase {
+    min-height: 44px;
+    padding: 6px 12px;
+    border: 1px solid var(--vora-panell);
+    border-radius: 999px;
+    background: var(--panell);
+    color: var(--text);
+    cursor: pointer;
+}
+.fase .fase-id {
+    font-weight: 700;
+}
+.fase.actual {
+    background: var(--primari);
+    border-color: var(--primari);
+    color: var(--panell);
+}
+@media (max-width: 560px) {
+    .fase {
+        padding: 6px 10px;
+    }
+    .fase .fase-nom {
+        display: none; /* al mòbil, només F1, F2… (el nom és a l'aria-label i al títol del panell) */
+    }
+}
+.fase:disabled {
+    cursor: not-allowed;
+    color: var(--text-suau);
+    background: transparent;
+}
+.fase:focus-visible,
+.btn:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--info);
+    outline-offset: 2px;
+}
+
+/* ── Disposició ────────────────────────────────────────────────────────── */
+.principal {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+@media (max-width: 760px) {
+    .principal {
+        grid-template-columns: 1fr;
+    }
+}
+.zona-tauler,
+.zona-panell,
+.zona-taula {
+    background: var(--panell);
+    border: 1px solid var(--vora-panell);
+    border-radius: var(--radi);
+    box-shadow: var(--ombra);
+    padding: 12px;
+}
+
+/* ── Tauler ────────────────────────────────────────────────────────────── */
+.tauler {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    background: var(--t-fons);
+    border-radius: 8px;
+    touch-action: none; /* només aquí: la resta de la pàgina es pot desplaçar */
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+.tauler:focus-visible {
+    outline: 3px solid var(--info);
+    outline-offset: 3px;
+}
+.t-linia {
+    stroke: var(--t-linia);
+    stroke-width: 0.02;
+}
+.t-punt {
+    fill: var(--t-punt);
+}
+.t-pol {
+    stroke-width: 0.09;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+.t-pol-vora {
+    stroke: var(--t-goma);
+    fill: none;
+}
+.t-pol-vora.t-tancat {
+    fill: var(--t-goma-fons);
+}
+.t-pol-forat {
+    stroke: var(--t-forat);
+    fill: var(--t-forat-fons);
+}
+.t-pol-forat.t-obert {
+    fill: none;
+}
+.t-pol-contra {
+    stroke: var(--t-contra);
+    fill: none;
+    stroke-dasharray: 0.25 0.12;
+}
+.t-vertex {
+    fill: var(--t-goma);
+}
+.t-vertex-forat {
+    fill: var(--t-forat);
+}
+.t-primer {
+    fill: none;
+    stroke: var(--t-goma);
+    stroke-width: 0.05;
+    stroke-dasharray: 0.12 0.08;
+}
+.t-marca-vora {
+    fill: var(--t-vora);
+}
+.t-marca-dins {
+    fill: var(--t-dins);
+}
+.t-error {
+    fill: none;
+    stroke: var(--t-contra);
+    stroke-width: 0.07;
+}
+.t-cursor {
+    fill: none;
+    stroke: var(--info);
+    stroke-width: 0.07;
+    stroke-dasharray: 0.14 0.08;
+}
+.t-quadret {
+    fill: var(--primari-clar);
+    stroke: var(--t-ajuda);
+    stroke-width: 0.025;
+}
+.t-contorn {
+    fill: none;
+    stroke: var(--t-ajuda);
+    stroke-width: 0.05;
+    stroke-dasharray: 0.18 0.1;
+}
+.t-diagonal {
+    stroke: var(--t-ajuda);
+    stroke-width: 0.05;
+    stroke-dasharray: 0.18 0.1;
+}
+.t-peca {
+    stroke: var(--t-ajuda);
+    stroke-width: 0.03;
+}
+.t-peca-a {
+    fill: var(--t-peca-a);
+}
+.t-peca-b {
+    fill: var(--t-peca-b);
+}
+.t-peca-c {
+    fill: var(--t-peca-c);
+}
+.t-peca-d {
+    fill: var(--t-peca-d);
+}
+.t-peca-tri {
+    fill: none;
+    stroke: none;
+}
+.t-peca-fora {
+    fill: var(--t-peca-b);
+}
+.t-etiqueta {
+    font-size: 0.42px;
+    font-weight: 700;
+    fill: var(--text);
+    paint-order: stroke;
+    stroke: var(--t-fons);
+    stroke-width: 0.12px;
+}
+.llegenda {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 8px;
+    color: var(--text-suau);
+    font-size: 0.9em;
+}
+.icona-vora,
+.icona-dins {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: -1px;
+}
+.icona-vora {
+    background: var(--t-vora);
+    transform: rotate(45deg) scale(0.85);
+}
+.icona-dins {
+    background: var(--t-dins);
+    border-radius: 50%;
+}
+
+/* ── Panell ────────────────────────────────────────────────────────────── */
+.cap-fase {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.cap-fase h2 {
+    margin: 0;
+    font-size: 1.15em;
+}
+.progres {
+    display: flex;
+    gap: 6px;
+}
+.progres .punt {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--primari);
+}
+.progres .punt.fet {
+    background: var(--primari);
+}
+.instruccio {
+    font-weight: 600;
+    margin: 10px 0;
+}
+.nota {
+    color: var(--text-suau);
+    font-size: 0.92em;
+    margin: 6px 0;
+}
+.camps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+}
+.camp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.camp span {
+    min-width: 8.5em;
+}
+.camp input,
+.compte input {
+    min-height: 44px;
+    width: 6em;
+    padding: 6px 10px;
+    border: 2px solid var(--vora-panell);
+    border-radius: 8px;
+    background: var(--panell);
+    color: var(--text);
+    font-size: 1.1em;
+}
+.camp.formula input {
+    width: 100%;
+    max-width: 20em;
+}
+.fila-tri {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.comptes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin: 6px 0;
+}
+.compte {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.formula-recordatori,
+.bellesa {
+    font-size: 1.35em;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primari-fosc);
+    margin: 8px 0;
+}
+.bellesa-text {
+    border-left: 4px solid var(--primari);
+    padding: 4px 10px;
+    margin: 8px 0;
+}
+.obre {
+    font-weight: 600;
+}
+.feedback .fb {
+    margin: 8px 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+.fb-error {
+    background: var(--error-fons);
+    color: var(--error);
+}
+.fb-be {
+    background: var(--be-fons);
+    color: var(--be);
+}
+.fb-info {
+    background: var(--info-fons);
+    color: var(--info);
+}
+.fb-icona {
+    font-weight: 700;
+}
+.accions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+.btn {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 2px solid var(--primari);
+    border-radius: 8px;
+    background: var(--panell);
+    color: var(--primari-fosc);
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-principal {
+    background: var(--primari);
+    color: var(--panell);
+}
+.btn-petit {
+    min-height: 36px;
+    padding: 4px 10px;
+    font-size: 0.85em;
+}
+.reeve {
+    margin: 10px auto 0;
+    max-width: 360px;
+    text-align: center;
+}
+.reeve svg {
+    width: 200px;
+}
+.rv-caixa {
+    stroke: var(--text-suau);
+    stroke-opacity: 0.45;
+    stroke-width: 1.2;
+}
+.rv-cara {
+    fill: var(--t-goma-fons);
+}
+.reeve figcaption {
+    text-align: left;
+    font-size: 0.95em;
+}
+.rv-aresta {
+    stroke: var(--t-goma);
+    stroke-width: 1.6;
+}
+.rv-amagada {
+    stroke: var(--t-goma);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 3;
+}
+.rv-punt {
+    fill: var(--t-punt);
+}
+.rv-vertex {
+    fill: var(--t-goma);
+}
+
+/* ── Taula ─────────────────────────────────────────────────────────────── */
+.zona-taula {
+    max-width: 1100px;
+    margin: 16px auto 0;
+}
+.zona-taula h2 {
+    margin: 0 0 8px;
+    font-size: 1.15em;
+}
+.taula-wrap {
+    overflow-x: auto;
+}
+table.taula {
+    border-collapse: collapse;
+    min-width: 320px;
+}
+.taula th,
+.taula td {
+    border-bottom: 1px solid var(--vora-panell);
+    padding: 4px 14px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+.taula th {
+    font-weight: 700;
+}
+.taula tr.nova td {
+    background: var(--primari-clar);
+}
+.taula .fase-col {
+    color: var(--text-suau);
+}
+.peu {
+    max-width: 1100px;
+    margin: 18px auto 0;
+    color: var(--text-suau);
+    font-size: 0.85em;
+}
+.peu a {
+    color: inherit;
+}
+
+/* ── Perfil PI: tauler 6 × 6, lletra gran ─────────────────────────────── */
+body.perfil-pi {
+    font-size: 20px;
+}
+body.perfil-pi .t-punt {
+    r: 0.12;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .taula tr.nova td {
+        transition: background 300ms;
+    }
+}
+
+/* ── Impressió: la taula, en negre sobre blanc ────────────────────────── */
+@page {
+    size: A4;
+    margin: 15mm;
+}
+@media print {
+    body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 12pt;
+    }
+    .fases,
+    .zona-panell,
+    .accions,
+    .llegenda,
+    .peu,
+    .capcalera a,
+    #accions-taula {
+        display: none !important;
+    }
+    .principal {
+        display: block;
+    }
+    .zona-tauler,
+    .zona-taula {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        background: #fff;
+    }
+    .zona-tauler {
+        display: none;
+    }
+    .capcalera h1,
+    .zona-taula h2,
+    .taula th,
+    .taula td,
+    .taula .fase-col {
+        color: #000;
+    }
+    .taula th,
+    .taula td {
+        border-bottom: 1px solid #000;
+        background: #fff !important;
+    }
+}

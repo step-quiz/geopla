@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Full de punts · Geoplà de Pick</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css?v=f1cb4d9f">
+    <link rel="stylesheet" href="css/imprimir.css?v=9e24bd04">
+</head>
+<body>
+    <header class="controls">
+        <h1>Full de punts per imprimir</h1>
+        <p>
+            <a href="index.html">← Torna al geoplà</a>
+        </p>
+        <label for="mida">Punts per costat</label>
+        <select id="mida">
+            <option value="6">6 × 6 (6 geoplans per full)</option>
+            <option value="8">8 × 8 (4 geoplans per full)</option>
+            <option value="11" selected>11 × 11 (2 geoplans per full)</option>
+        </select>
+        <button type="button" id="btn-imprimeix" class="btn">Imprimeix</button>
+        <p id="avis" class="avis" hidden>
+            Abans d’imprimir: a les opcions del navegador, desmarca «Capçaleres i peus de pàgina».
+            <button type="button" id="btn-entesos" class="btn btn-petit">Entesos</button>
+        </p>
+    </header>
+    <main id="full" class="full"></main>
+    <script src="js/ui/full-punts.js?v=c67c1ed7"></script>
+</body>
+</html>
